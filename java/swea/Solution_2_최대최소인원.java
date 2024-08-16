@@ -58,30 +58,32 @@ public class Solution_2_최대최소인원 {
 //			}
 			
 			// 첫 번째 분반
-			for (int i = min-1; i < N-min; i++) {
-				if (score[i]==score[i+1]) {
-					i++;
+			for (int i = min; i < N-min; i++) {
+				if (score[i-1]==score[i]) {
 					continue;
 				}
 				// 두 번째 분반
-				for (int j = i+min; j < N-1; j++) {
+				for (int j = i+min; j < N; j++) {
 					int n = 0;
 					int l = 0;
-					if(score[j]==score[j+1]) {
-						j++;
+					
+					if(score[j-1]==score[j]) {
+						continue;
+					} else if (j-i > max || N-1-j > max) {
 						continue;
 					}
+					
 					if (j > N-min) {
-						m = j-i;
+						m = Math.min(N-i, m);
 					} else {
 						n = Math.max(i, Math.max(j-i, N-j));
 						l = Math.min(i, Math.min(j-i, N-j));
 						m = Math.min(n - l, m);
+//						System.out.println(n + " " + l);
+//						System.out.println(i + " " + j);
 					}
-					System.out.println(m);
 				}
 			}
-			
 			if (m==1000) m = -1;
 			
 			sb.append(m);
